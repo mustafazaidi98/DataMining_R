@@ -1,0 +1,110 @@
+---
+title: "CS 422 HW6"
+author: "Syed Alle Mustafa, Illinois Institute of Technology"
+output:
+  html_document:
+    toc: yes
+    df_print: paged
+  html_notebook:
+    toc: yes
+    toc_float: yes
+---
+
+### Part 2-A
+
+```{r}
+library(arules)
+library(arulesViz)
+```
+### Part 2-A-1k
+```{r}
+tr_1k <- read.transactions("tr-1k-canonical.csv", sep=",")
+summary(tr_1k)
+inspect(tr_1k[1:5])
+```
+```{r}
+freq_its_1k <- apriori(tr_1k,parameter = list(support=0.01,target="frequent itemsets")) 
+inspect(sort(freq_its_1k,decreasing = TRUE, by="count"))
+```
+```{r}
+rules_1k <- apriori(tr_1k, parameter = list(support=0.01,confidence = 0.90))
+summary(rules_1k)
+```
+```{r}
+inspect(head(rules_1k,by="confidence"))
+```
+
+### Part 2-A-5k
+```{r}
+tr_5k <- read.transactions("tr-5k-canonical.csv", sep=",")
+summary(tr_5k)
+inspect(tr_5k[1:5])
+```
+```{r}
+freq_its_5k <- apriori(tr_5k,parameter = list(support=0.01,target="frequent itemsets")) 
+inspect(sort(freq_its_5k,decreasing = TRUE, by="count"))
+```
+```{r}
+rules_5k <- apriori(tr_5k, parameter = list(support=0.01,confidence = 0.90))
+summary(rules_5k)
+```
+```{r}
+inspect(head(rules_5k,by="confidence"))
+```
+### Part 2-A-20k
+```{r}
+tr_20k <- read.transactions("tr-20k-canonical.csv", sep=",")
+summary(tr_20k)
+inspect(tr_20k[1:5])
+```
+```{r}
+freq_its_20k <- apriori(tr_20k,parameter = list(support=0.01,target="frequent itemsets")) 
+inspect(sort(freq_its_20k,decreasing = TRUE, by="count"))
+```
+```{r}
+rules_20k <- apriori(tr_20k, parameter = list(support=0.01,confidence = 0.90))
+summary(rules_20k)
+```
+```{r}
+inspect(head(rules_20k,by="confidence"))
+```
+### Part 2-A-75k
+```{r}
+tr_75k <- read.transactions("tr-75k-canonical.csv", sep=",")
+summary(tr_75k)
+inspect(tr_75k[1:5])
+```
+```{r}
+freq_its_75k <- apriori(tr_75k,parameter = list(support=0.01,target="frequent itemsets")) 
+inspect(sort(freq_its_75k,decreasing = TRUE, by="count"))
+```
+```{r}
+rules_75k <- apriori(tr_75k, parameter = list(support=0.01,confidence = 0.90))
+summary(rules_75k)
+```
+```{r}
+inspect(head(rules_75k,by="confidence"))
+```
+### Part 2-B
+```{r}
+summary(rules_75k)
+```
+
+```{r}
+summary(rules_1k)
+```
+
+```{r}
+cat("The 1000 transaction create 68 rules, where 75000 transaction only create 73 rules, ")
+cat("considering the mean and median value of support which are also high, and the count  ")
+cat("of the rules show that the transaction set of 75000 have stronger and frequent association ")
+cat("than that of 1000transactions set.")
+```
+
+
+### Part 2-C
+```{r}
+cat("1. Coffee eclair is the most frequent item with a count of 8193.")
+# inspect(head(sort(freq_its_75k, decreasing = F, by="count")))
+cat("\n2. The least significant itemset is Apple Croissant, Apple Danish, Apple Tart, Cherry Soda")
+```
